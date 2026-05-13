@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0">
+
+<title>SMART KEY LIST 🔥</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Consolas;
+}
+
+body{
+
+background:
+radial-gradient(circle at top,
+#2a0000,
+#120000,
+#000);
+
+color:#ff4d4d;
+
+padding:12px;
+
+min-height:100vh;
+
+overflow-x:hidden;
+
+}
+
+/* NEON */
+
+body::before{
+
+content:"";
+
+position:fixed;
+
+inset:0;
+
+border:3px solid #ff0000;
+
+border-radius:18px;
+
+pointer-events:none;
+
+box-shadow:
+
+0 0 20px #ff0000,
+
+0 0 40px #ff0000,
+
+inset 0 0 10px #ff0000;
+
+z-index:99999;
+
+}
+
+/* CONTAINER */
+
+.container{
+
+max-width:680px;
+
+margin:auto;
+
+padding-bottom:120px;
+
+}
+
+/* CARD */
+
+.card{
+
+background:
+linear-gradient(
+180deg,
+rgba(30,0,0,.95),
+rgba(10,0,0,.95)
+);
+
+border:2px solid rgba(255,0,0,.35);
+
+border-radius:24px;
+
+padding:20px;
+
+margin-bottom:18px;
+
+box-shadow:
+
+0 0 18px rgba(255,0,0,.2),
+
+inset 0 0 10px rgba(255,0,0,.1);
+
+}
+
+/* TITLE */
+
+.title{
+
+font-size:32px;
+
+font-weight:bold;
+
+text-align:center;
+
+margin-bottom:14px;
+
+text-shadow:
+0 0 15px #ff0000;
+
+}
+
+.logo{
+
+font-size:88px;
+
+text-align:center;
+
+margin-bottom:10px;
+
+}
+
+/* KEY CARD */
+
+.key-item{
+
+background:
+linear-gradient(
+180deg,
+rgba(40,0,0,.95),
+rgba(15,0,0,.95)
+);
+
+border:2px solid rgba(255,0,0,.35);
+
+border-radius:20px;
+
+padding:18px;
+
+margin-bottom:14px;
+
+box-shadow:
+
+0 0 14px rgba(255,0,0,.15),
+
+inset 0 0 8px rgba(255,0,0,.08);
+
+}
+
+/* KEY */
+
+.key-text{
+
+font-size:18px;
+
+font-weight:bold;
+
+word-break:break-all;
+
+margin-bottom:12px;
+
+text-shadow:
+0 0 8px #ff0000;
+
+line-height:1.7;
+
+}
+
+/* STATUS */
+
+.status{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+gap:14px;
+
+font-size:14px;
+
+margin-top:10px;
+
+flex-wrap:wrap;
+
+line-height:1.8;
+
+}
+
+/* ONLINE */
+
+.online{
+
+color:#00ff6a;
+
+font-weight:bold;
+
+text-shadow:
+0 0 10px #00ff6a;
+
+}
+
+/* OFFLINE */
+
+.offline{
+
+color:#ff4444;
+
+font-weight:bold;
+
+text-shadow:
+0 0 10px #ff0000;
+
+}
+
+/* DELETE */
+
+.delete-btn{
+
+margin-top:14px;
+
+width:100%;
+
+height:50px;
+
+border:none;
+
+border-radius:16px;
+
+background:
+linear-gradient(
+90deg,
+#7a0000,
+#ff0000
+);
+
+color:#fff;
+
+font-size:15px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+box-shadow:
+
+0 0 16px rgba(255,0,0,.35);
+
+}
+
+/* FOOTER */
+
+.footer{
+
+text-align:center;
+
+font-size:13px;
+
+color:#ff8a8a;
+
+margin-top:10px;
+
+line-height:1.8;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- HEADER -->
+
+<div class="card">
+
+<div class="logo">
+
+🔥
+
+</div>
+
+<div class="title">
+
+SMART KEY LIST
+
+</div>
+
+<div style="
+text-align:center;
+font-size:14px;
+line-height:1.8;
+color:#ff9d9d;
+">
+
+• FIREBASE REALTIME<br>
+
+• AUTO CHECK KEY<br>
+
+• ONLINE / OFFLINE STATUS<br>
+
+• LIVE COUNTDOWN
+
+</div>
+
+</div>
+
+<!-- LIST -->
+
+<div id="keyList">
+
+</div>
+
+<div class="footer">
+
+SMART PANEL SYSTEM 🔥
+
+</div>
+
+</div>
+
+<script type="module">
+
+import {
+initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+
+import {
+getDatabase,
+ref,
+onValue,
+remove
+}
+from
+"https://www.gstatic.com/firebasejs/12.13.0/firebase-database.js";
+
+/* FIREBASE */
+
+const firebaseConfig = {
+
+apiKey:
+"AIzaSyBU9c-W9aIy-l2soskbXAZbdHLOOom8Cks",
+
+authDomain:
+"duchuykey.firebaseapp.com",
+
+databaseURL:
+"https://duchuykey-default-rtdb.firebaseio.com",
+
+projectId:
+"duchuykey",
+
+storageBucket:
+"duchuykey.firebasestorage.app",
+
+messagingSenderId:
+"674334923476",
+
+appId:
+"1:674334923476:web:d90bd3cf6c5c108b673941"
+
+};
+
+const app =
+initializeApp(firebaseConfig);
+
+const db =
+getDatabase(app);
+
+/* REALTIME */
+
+onValue(
+ref(db,"keys"),
+(snapshot)=>{
+
+const data =
+snapshot.val();
+
+renderKeys(data);
+
+/* AUTO UPDATE */
+
+clearInterval(window.timeLoop);
+
+window.timeLoop =
+setInterval(()=>{
+
+renderKeys(data);
+
+},1000);
+
+});
+
+/* RENDER */
+
+function renderKeys(data){
+
+const list =
+document.getElementById(
+"keyList"
+);
+
+list.innerHTML = "";
+
+if(!data){
+
+list.innerHTML =
+
+`
+<div class="card">
+
+KHÔNG CÓ KEY
+
+</div>
+`;
+
+return;
+
+}
+
+Object.keys(data).forEach(key=>{
+
+const item =
+data[key];
+
+const remain =
+item.expire - Date.now();
+
+let textTime =
+"HẾT HẠN";
+
+if(remain > 0){
+
+const d =
+Math.floor(
+remain / 86400000
+);
+
+const h =
+Math.floor(
+(remain % 86400000)
+/ 3600000
+);
+
+const m =
+Math.floor(
+(remain % 3600000)
+/ 60000
+);
+
+const s =
+Math.floor(
+(remain % 60000)
+/ 1000
+);
+
+textTime =
+
+d + " NGÀY " +
+
+h + " GIỜ " +
+
+m + " PHÚT " +
+
+s + " GIÂY";
+
+}
+
+const online =
+item.online;
+
+list.innerHTML +=
+
+`
+<div class="key-item">
+
+<div class="key-text">
+
+🔑 ${key}
+
+</div>
+
+<div class="status">
+
+<div>
+
+⏳ ${textTime}
+
+</div>
+
+<div class="${
+online
+?
+'online'
+:
+'offline'
+}">
+
+${
+online
+?
+'ONLINE'
+:
+'OFFLINE'
+}
+
+</div>
+
+</div>
+
+<button
+class="delete-btn"
+onclick="deleteKey('${key}')">
+
+XOÁ KEY
+
+</button>
+
+</div>
+`;
+
+});
+
+}
+
+/* DELETE */
+
+window.deleteKey =
+async function(key){
+
+const ok =
+confirm(
+"XOÁ KEY?"
+);
+
+if(!ok) return;
+
+await remove(
+ref(db,"keys/" + key)
+);
+
+}
+
+</script>
+
+</body>
+
+</html>
